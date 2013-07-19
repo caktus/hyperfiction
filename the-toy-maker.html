@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<script src="../polymer-all/polymer/polymer.js"></script>
+<link rel="import" href="hf-base.html">
+<link rel="import" href="hf-condition.html">
+<link rel="import" href="hf-action.html">
+<link rel="import" href="hf-scene.html">
+<link rel="import" href="hf-game.html">
+<style>
+    @keyframes reveal
+    {
+        from {opacity: 0.0;}
+        to {opacity: 1.0;}
+    }
+
+    @-webkit-keyframes reveal /* Safari and Chrome */
+    {
+        from {opacity: 0.0;}
+        to {opacity: 1.0;}
+    }
+
+    .reveal {
+        opacity: 0.0;
+    }
+
+    .active .reveal {
+        animation: reveal 3s forwards;
+        -webkit-animation: reveal 3s forwards;
+    }
+</style>
+<body>
+
+    <hf-game gameTitle="The Toy Maker">
+
+        <hf-scene name=start class=active>
+            <p>The old man's love of <hf-action flag=look-toys>toys</hf-action> is obvious. His <hf-action flag=look-workshop>workshop</hf-action> is just littered with them.</p>
+
+            <hf-condition has=look-toys>
+                <p>The shelves are full of toys, ready to be packaged for the store front, or remaining as tropheys of his best designs.</p>
+            </hf-condition>
+
+            <hf-condition has=look-workshop>
+                <div>His workbench is stacked with parts and
+                
+                <hf-condition hasnot=look-in-between-projects>
+                    <hf-action flag=look-in-between-projects>
+                        in-between projects.
+                    </hf-action>
+                    It had paint brushes with old paint in the bristles, sketches of dreams yet to be made real, and the edge is worn by years of arms that knew what they were doing, leaning against that table <hf-action goto=toy-magic>doing their magic</hf-action>.
+                </hf-condition>
+                <hf-condition has=look-in-between-projects>
+                    in-between projects, of which there are quite a few, now that you look. Even among the shelves, not just at the workbench. Toy soldiers are missing coats of paint. Airplanes are missing propellers or wings. Most of them seem to be <hf-action goto=unfinished-toy>unfinished</hf-action>, actuallly.
+                </hf-condition>
+                </div>
+            
+            </hf-condition>
+        </hf-scene>
+
+        <hf-scene name=toy-magic>
+            <p>You pick up a wooden puzzle.</p>
+            <p>It has been expertly carved from pine, smoothed, and painted. While you are trying to figure it out, the <hf-action goto=buy-toy>old man</hf-action> comes back.</p>
+        </hf-scene>
+
+        <hf-scene name=unfinished-toy>
+            <p>You pick up a small doll, which seems to have been carved with a lot of love. Only half of the doll has been painted, and it seems to have collected some dust.</p>
+            <p>The <hf-action goto=ask-doll>old man</hf-action> comes into the shop from the back, while you're looking at the doll.</p>
+        </hf-scene>
+
+        <hf-scene name=buy-toy>
+            <p>"My daughter will love this puzzle," you tell him. "How much for it?"</p>
+            <p class=reveal>"It is ten," he tells you, with s small smile.</p>
+        </hf-scene>
+
+        <hf-scene name=ask-doll>
+            <p>"If I returned, would this doll be ready for sale? I think my daughter would love it. When it is finished," you say.</p>
+
+            <p class=reveal>"You can wait, but waiting may only disappoint you," he snaps, snatching the doll from your hands and shoving a wooden puzzle into your pocket. "No, get out!"</p>
+        </hf-scene>
+
+    </hf-game>
+
+</body>
