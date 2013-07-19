@@ -1,0 +1,31 @@
+<polymer-element name=hf-action attributes="keep description flag goto" extends=hf-base>
+    <template>
+        <style>
+        @host {
+            :scope {
+            }
+        }
+        </style>
+        <a href="#" on-click=perform>{{ description }}</a>
+    </template>
+    <script>
+        Polymer('hf-action', {
+            ready: function(){
+                var self = this;
+                this.description = this.innerHTML;
+            },
+            perform: function(event) {
+                var flag = this.flag;
+                if (flag) {
+                    this.fire('hfGotFlag', {flag: flag});
+                }
+                var gotoscene = this['goto'];
+                if (gotoscene) {
+                    this.fire('hfGotoScene', {name: gotoscene});
+                }
+
+                event.preventDefault();
+            },
+        });
+    </script>
+</polymer-element>
