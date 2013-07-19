@@ -1,4 +1,4 @@
-<polymer-element name="hf-scene" extends="hf-base">
+<polymer-element name="hf-scene" attributes="name" extends="hf-base">
     <template>
         <style>
         @host {
@@ -26,6 +26,9 @@
     </template>
     <script>
         Polymer('hf-scene', {
+            ready: function() {
+                this.game = this.parent('hf-game');
+            },
             title: function() {
                 return this.getAttribute('title')||'';    
             },
@@ -35,9 +38,8 @@
                     el.setAttribute('class', 'active');
                     el = el.parentNode;
                 }
-                var flag = this.getAttribute('flag');
-                if (flag) {
-                    this.parentNode.setFlag(flag);
+                if (this.flag) {
+                    this.game.takeFlag(this);
                 }
             },
             leave: function() {

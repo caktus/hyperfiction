@@ -23,18 +23,11 @@
                 c[i].addClass('condition-met');
             }
         },
-        setFlag: function(flag) {
+        takeFlag: function(el) {
+            var flag = el.flag;
+            el.flag = null;
             this.flags[flag] = true;
-            var c = document.querySelectorAll('hf-condition[has='+flag+']');
-            for (var i=0; i<c.length; i++) {
-                c[i].addClass('condition-met');
-                c[i].setAttribute('class', 'condition-met');
-            }
-            c = document.querySelectorAll('hf-condition[hasnot='+flag+']');
-            for (var i=0; i<c.length; i++) {
-                console.log(c[i]);
-                c[i].removeClass('condition-met');
-            }
+            this.fire('hfGotFlag', {flag: flag});
         },
         enterScene: function(scene) {
             if (this.scene) {

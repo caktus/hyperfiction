@@ -1,4 +1,4 @@
-<polymer-element name="hf-base">
+<polymer-element name="hf-base" attributes="flag">
     <script>
         Polymer('hf-base', {
             hasClass: function (cls) {
@@ -14,7 +14,19 @@
                     var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
                     this.className = this.className.replace(reg,' ');
                 }
-            }
+            },
+            parent: function (selector) {
+                var el = this.parentNode;
+                var par = el.parentNode;
+                while (Array.prototype.indexOf.call(par.querySelectorAll(selector), el) === -1) {
+                    el = par;
+                    par = par.parentNode;
+                    if (el === document) {
+                        break;
+                    }
+                }
+                return el;
+            },
         });
     </script>
 </polymer-element>

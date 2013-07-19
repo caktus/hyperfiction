@@ -1,4 +1,4 @@
-<polymer-element name=hf-condition extends=hf-base>
+<polymer-element name=hf-condition attributes="has hasnot" extends=hf-base>
     <template>
         <style>
         @host {
@@ -12,4 +12,24 @@
         </style>
         <content></content>
     </template>
+    <script>
+        Polymer('hf-condition', {
+            ready: function(){
+                var el = this;
+                this.game = this.parent('hf-game');
+
+                this.game.addEventListener('hfGotFlag', function(ev) {
+                    el.checkFlag(ev.detail.flag);
+                });
+            },
+            checkFlag: function(flag) {
+                if (this.has && this.has === flag) {
+                    this.addClass('condition-met');
+                }
+                if (this.hasnot && this.hasnot === flag) {
+                    this.removeClass('condition-met');
+                }
+            },
+        });
+    </script>
 </polymer-element>
