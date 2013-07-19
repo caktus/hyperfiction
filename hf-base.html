@@ -1,0 +1,20 @@
+<polymer-element name="hf-base">
+    <script>
+        Polymer('hf-base', {
+            hasClass: function (cls) {
+                return this.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+            },
+            addClass: function (cls) {
+                if (!this.hasClass(cls)) {
+                    this.className += " "+cls;
+                }
+            },
+            removeClass: function (cls) {
+                if (this.hasClass(cls)) {
+                    var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+                    this.className = this.className.replace(reg,' ');
+                }
+            }
+        });
+    </script>
+</polymer-element>
