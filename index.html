@@ -58,7 +58,9 @@
         The shadow seems be shaking under the weight of the light.
         </p>
 
-        <hf-action flag=item-shadow>Take it?</hf-action>
+        <hf-condition hasnot=item-shadow class=reveal>
+            <hf-action flag=item-shadow>Take it?</hf-action>
+        </hf-condition>
 
         <hf-condition has=item-shadow class=reveal>
             You reach through the light, and you didn't know something could be so hot and still feel so... warm.

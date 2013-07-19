@@ -36,6 +36,10 @@
                 var flag = ev.detail.flag;
                 game.flags[flag] = true;
             });
+
+            this.on('hfGotoScene', function(ev){
+                game.enterScene(ev.detail.name);
+            });
         },
         enterScene: function(scene) {
             if (typeof scene === 'string') {

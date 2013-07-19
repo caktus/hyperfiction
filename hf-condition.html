@@ -20,19 +20,9 @@
                 hasnot: null,
             },
             ready: function() {
-                this.checkFlag('start');
-            },
-            checkAllFlags: function() {
                 this.checkFlag('');
-                var flags = this.game.flags;
-                for (flag in flags) {
-                    if (flags.hasOwnProperty(flag)) {
-                        this.checkFlag(flag);
-                    }
-                }
             },
             checkFlag: function(flag) {
-                console.log(this, this.has, this.hasnot, flag);
                 if (this.has && this.has === flag) {
                     this.addClass('condition-met');
                 } else if (!this.has) {
