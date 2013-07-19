@@ -1,7 +1,24 @@
-<polymer-element name="hf-game" extends="hf-base">
+<polymer-element name="hf-game" attributes="tagline gameTitle" extends="hf-base">
     <template>
+        <style>@host{
+            :scope {
+                display: block;
+                width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 50px;
+                background: #f4f4f4;
+                border-radius: 10px;
+                box-shadow: 0px 0px 30px #ccc;
+                padding: 20px;
+            }
+            h1 {
+                margin-top: 10px;
+            }
+        }</style>
         <header>
-            <h3> <i>You see...</i> </h3>
+            <h1>{{gameTitle}}!</h1>
+            <h3>{{scene.title}}</h3>
         </header>
         <content></content>
     </template>
@@ -22,18 +39,17 @@
             for (var i=0; i<c.length; i++) {
                 c[i].addClass('condition-met');
             }
-        },
-        takeFlag: function(el) {
-            var flag = el.flag;
-            el.flag = null;
-            this.flags[flag] = true;
-            this.fire('hfGotFlag', {flag: flag});
+
+            this.on('hfGotFlag', function(ev){ 
+                var flag = ev.detail.flag;
+                game.flags[flag] = true;
+            });
         },
         enterScene: function(scene) {
             if (this.scene) {
                 this.scene.leave();
             }
-            scene.enter();
+            scene.enter(this.flags);
             this.scene = scene;
             if (scene.level > 1) {
                 back = document.getElementById('back');

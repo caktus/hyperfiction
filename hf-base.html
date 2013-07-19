@@ -1,4 +1,4 @@
-<polymer-element name="hf-base" attributes="flag">
+<polymer-element name="hf-base" attributes="flag flags">
     <script>
         Polymer('hf-base', {
             hasClass: function (cls) {
@@ -26,6 +26,9 @@
                     }
                 }
                 return el;
+            },
+            on: function(evtype, callback) {
+                this.addEventListener(evtype, callback);
             },
         });
     </script>

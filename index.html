@@ -2,6 +2,7 @@
 <script src="../polymer-all/polymer/polymer.js"></script>
 <link rel="import" href="hf-base.html">
 <link rel="import" href="hf-condition.html">
+<link rel="import" href="hf-action.html">
 <link rel="import" href="hf-scene.html">
 <link rel="import" href="hf-game.html">
 <style>
@@ -28,9 +29,9 @@
 </style>
 <body>
 
-    <hf-game>
+    <hf-game gameTitle="A White Room" tagline="A test game for HyperFiction">
 
-    <hf-scene name=white-room class=active title="A white room">
+    <hf-scene name=white-room class=active>
         You are standing in a white room, with a <a href=#box>box</a>.
 
         <hf-condition hasnot=item-shadow>
@@ -42,7 +43,7 @@
         </hf-condition>
     </hf-scene>
 
-    <hf-scene name=box>
+    <hf-scene name=box title="Looking into the box">
     You've opened the box, and a light <a href=#glows>glows</a> from <a href=#within-the-box>within it</a>.
 
         <hf-scene name=glows>
@@ -51,19 +52,23 @@
     </hf-scene>
 
     <hf-scene name=within-the-box>
-    Under the light, or behind it, or within it, you see <a href=#shadow-in-box>a shape wrapped in a shadow</a>.
-    <p>
-    The shadow seems be shaking under the weight of the light.
-    </p>
+        Under the light, or behind it, or within it, you see a shape wrapped in a shadow.
+
+        <p>
+        The shadow seems be shaking under the weight of the light.
+        </p>
+
+        <hf-action flag=item-shadow>Take it?</hf-action>
+
+        <hf-condition has=item-shadow>
+            You reach through the light, and you didn't know something could be so hot and still feel so... warm.
+            <p>
+            You take the thing wrapped in a shadow.</p>
+            <p>
+            Back to the <a href=#white-room>room</a>?</p>
+        </hf-condition>
     </hf-scene>
 
-    <hf-scene name=shadow-in-box flag=item-shadow>
-        You reach through the light, and you didn't know something could be so hot and still feel so... warm.
-        <p>
-        You take the thing wrapped in a shadow.</p>
-        <p>
-        Back to the <a href=#white-room>room</a>?</p>
-    </hf-scene>
 
     <hf-scene name=hole>
         <p>The shape slides into the hole, and the shadow spreads across the walls...</p>

@@ -14,16 +14,27 @@
     </template>
     <script>
         Polymer('hf-condition', {
-            ready: function(){
-                var el = this;
-                this.game = this.parent('hf-game');
-
-                this.game.addEventListener('hfGotFlag', function(ev) {
-                    el.checkFlag(ev.detail.flag);
-                });
+            properties: {
+                has: null,
+                hasnot: null,
+            },
+            ready: function() {
+                this.checkFlag('start');
+            },
+            checkAllFlags: function() {
+                this.checkFlag('');
+                var flags = this.game.flags;
+                for (flag in flags) {
+                    if (flags.hasOwnProperty(flag)) {
+                        this.checkFlag(flag);
+                    }
+                }
             },
             checkFlag: function(flag) {
+                console.log('c', flag, this.has, this.hasnot);
                 if (this.has && this.has === flag) {
+                    this.addClass('condition-met');
+                } else if (!this.has) {
                     this.addClass('condition-met');
                 }
                 if (this.hasnot && this.hasnot === flag) {

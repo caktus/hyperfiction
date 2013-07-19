@@ -1,4 +1,4 @@
-<polymer-element name="hf-scene" attributes="name" extends="hf-base">
+<polymer-element name="hf-scene" attributes="name title" extends="hf-base">
     <template>
         <style>
         @host {
@@ -11,35 +11,30 @@
                 :scope hf-scene header {
                     display: none;
                 }
-                :scope hf-scene footer {
-                    display: block;
-                }
             :scope.active {
                 display: block;
             }
         }
         </style>
         <content></content>
-        <footer>
-            <button id=back onclick="javascript:window.history.back()">Back</button>
-        </footer>
     </template>
     <script>
         Polymer('hf-scene', {
             ready: function() {
-                this.game = this.parent('hf-game');
+                var scene = this;
+                scene.game = scene.parent('hf-game');
+                this.game.on('hfGotFlag', function(ev) {
+                    var c = scene.querySelectorAll('hf-condition');
+                    for (var i=0; i<c.length; i++) {
+                        c[i].checkFlag(ev.detail.flag);
+                    }
+                });
             },
-            title: function() {
-                return this.getAttribute('title')||'';    
-            },
-            enter: function() {
+            enter: function(flags) {
                 var el = this;
                 while (el.tagName === 'HF-SCENE') {
                     el.setAttribute('class', 'active');
                     el = el.parentNode;
-                }
-                if (this.flag) {
-                    this.game.takeFlag(this);
                 }
             },
             leave: function() {
