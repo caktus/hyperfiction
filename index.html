@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<script src="../polymer-all/polymer/polymer.js"></script>
+<link rel="import" href="hf-elements.html">
+<style>
+    hf-scene {
+        display: none;
+    }
+        hf-scene footer {
+            display: none;
+        }
+        hf-scene hf-scene header {
+            display: none;
+        }
+        hf-scene hf-scene footer {
+            display: block;
+        }
+    hf-scene.active {
+        display: block;
+    }
+    hf-condition {
+        display: none;
+    }
+    hf-condition.condition-met {
+        display: block;
+    }
+
+    @keyframes reveal
+    {
+        from {opacity: 0.0;}
+        to {opacity: 1.0;}
+    }
+
+    @-webkit-keyframes reveal /* Safari and Chrome */
+    {
+        from {opacity: 0.0;}
+        to {opacity: 1.0;}
+    }
+
+    .hf-reveal {
+        opacity: 0.0;
+    }
+
+    .active .hf-reveal {
+        animation: reveal 3s forwards;
+        -webkit-animation: reveal 3s forwards;
+    }
+</style>
+<body>
+
+    <hf-game>
+
+    <hf-scene name=white-room class=active title="A white room">
+        You are standing in a white room, with a <a href=#box>box</a>.
+
+        <hf-condition hasnot=item-shadow>
+            The walls seem completely smooth, without any windows or doors of any sort.
+        </hf-condition>
+
+        <hf-condition has=item-shadow>
+            There is <a href=#hole>a small hole</a>, shaped like your shadow, in one of the white walls.
+        </hf-condition>
+    </hf-scene>
+
+    <hf-scene name=box>
+    You've opened the box, and a light <a href=#glows>glows</a> from <a href=#within-the-box>within it</a>.
+
+        <hf-scene name=glows>
+            The light seems to be wiggling.
+        </hf-scene>
+    </hf-scene>
+
+    <hf-scene name=within-the-box>
+    Under the light, or behind it, or within it, you see <a href=#shadow-in-box>a shape wrapped in a shadow</a>.
+    <p>
+    The shadow seems be shaking under the weight of the light.
+    </p>
+    </hf-scene>
+
+    <hf-scene name=shadow-in-box flag=item-shadow>
+        You reach through the light, and you didn't know something could be so hot and still feel so... warm.
+        <p>
+        You take the thing wrapped in a shadow.</p>
+        <p>
+        Back to the <a href=#white-room>room</a>?</p>
+    </hf-scene>
+
+    <hf-scene name=hole>
+        <p>The shape slides into the hole, and the shadow spreads across the walls...</p>
+        <p class=hf-reveal> You are now standing in darkness.</p>
+    </hf-scene>
+
+    </hf-game>
+
+</body>
