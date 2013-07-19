@@ -1,56 +1,8 @@
-<script type="text/javascript">
-    function hasClass(ele,cls) {
-        return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
-    }
-    function addClass(ele,cls) {
-        if (!this.hasClass(ele,cls)) ele.className += " "+cls;
-    }
-    function removeClass(ele,cls) {
-        if (hasClass(ele,cls)) {
-            var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-            ele.className=ele.className.replace(reg,' ');
-        }
-    }
-</script>
-<polymer-element name="hf-scene">
+<polymer-element name="hf-game" extends="hf-base">
     <template>
         <header>
             <h3> <i>You see...</i> </h3>
         </header>
-        <content></content>
-        <footer>
-            <button id=back onclick="javascript:window.history.back()">Back</button>
-        </footer>
-    </template>
-    <script>
-        Polymer('hf-scene', {
-            title: function() {
-                return this.getAttribute('title')||'';    
-            },
-            enter: function() {
-                var el = this;
-                while (el.tagName === 'HF-SCENE') {
-                    el.setAttribute('class', 'active');
-                    el = el.parentNode;
-                }
-                var flag = this.getAttribute('flag');
-                if (flag) {
-                    this.parentNode.setFlag(flag);
-                }
-            },
-            leave: function() {
-                var el = this;
-                while (el.tagName === 'HF-SCENE') {
-                    el.setAttribute('class', '');
-                    el = el.parentNode;
-                }
-            },
-        });
-    </script>
-</polymer-element>
-
-<polymer-element name="hf-game">
-    <template>
         <content></content>
     </template>
     <script>
@@ -68,19 +20,20 @@
 
             var c = document.querySelectorAll('hf-condition[hasnot]');
             for (var i=0; i<c.length; i++) {
-                addClass(c[i], 'condition-met');
+                c[i].addClass('condition-met');
             }
         },
         setFlag: function(flag) {
             this.flags[flag] = true;
             var c = document.querySelectorAll('hf-condition[has='+flag+']');
             for (var i=0; i<c.length; i++) {
-                addClass(c[i], 'condition-met');
+                c[i].addClass('condition-met');
                 c[i].setAttribute('class', 'condition-met');
             }
             c = document.querySelectorAll('hf-condition[hasnot='+flag+']');
             for (var i=0; i<c.length; i++) {
-                removeClass(c[i], 'condition-met');
+                console.log(c[i]);
+                c[i].removeClass('condition-met');
             }
         },
         enterScene: function(scene) {

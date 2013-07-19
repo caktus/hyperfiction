@@ -1,8 +1,24 @@
-<polymer-element name="hf-scene">
+<polymer-element name="hf-scene" extends="hf-base">
     <template>
-        <header>
-            <h3> <i>You see...</i> </h3>
-        </header>
+        <style>
+        @host {
+            :scope {
+                display: none;
+            }
+                :scope footer {
+                    display: none;
+                }
+                :scope hf-scene header {
+                    display: none;
+                }
+                :scope hf-scene footer {
+                    display: block;
+                }
+            :scope.active {
+                display: block;
+            }
+        }
+        </style>
         <content></content>
         <footer>
             <button id=back onclick="javascript:window.history.back()">Back</button>

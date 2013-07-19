@@ -1,3 +1,15 @@
 <polymer-element name=hf-condition extends=hf-base>
-    
+    <template>
+        <style>
+        @host {
+            :scope {
+                display: none;
+            }
+            :scope.condition-met {
+                display: block;
+            }
+        }
+        </style>
+        <content></content>
+    </template>
 </polymer-element>
