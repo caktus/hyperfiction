@@ -4,6 +4,7 @@
         @host {
             :scope {
                 display: none;
+                margin-top: 1em;
             }
                 :scope footer {
                     display: none;
@@ -29,18 +30,21 @@
                         c[i].checkFlag(ev.detail.flag);
                     }
                 });
+                if (this.parentNode.tagName === 'HF-SCENE') {
+                    this.partOf = this.parentNode;
+                }
             },
             enter: function(flags) {
                 var el = this;
                 while (el.tagName === 'HF-SCENE') {
-                    el.setAttribute('class', 'active');
+                    el.addClass('active');
                     el = el.parentNode;
                 }
             },
             leave: function() {
                 var el = this;
                 while (el.tagName === 'HF-SCENE') {
-                    el.setAttribute('class', '');
+                    el.removeClass('active');
                     el = el.parentNode;
                 }
             },

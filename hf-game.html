@@ -17,8 +17,7 @@
             }
         }</style>
         <header>
-            <h1>{{gameTitle}}!</h1>
-            <h3>{{scene.title}}</h3>
+            <h1>{{gameTitle}}</h1>
         </header>
         <content></content>
     </template>
@@ -27,18 +26,11 @@
         ready: function(){
             this.flags = {};
             var game = this;
-
-            window.onhashchange = function(ev) {
-                var name = ev.newURL.split('#')[1] || 'white-room';
-                var scene = document.querySelector('hf-scene[name='+name+']');
-                game.enterScene(scene);
-            };
-            window.onhashchange({newURL: window.location.toString()});
-
             var c = document.querySelectorAll('hf-condition[hasnot]');
             for (var i=0; i<c.length; i++) {
                 c[i].addClass('condition-met');
             }
+            this.scene = this.querySelector('hf-scene[class=active]');
 
             this.on('hfGotFlag', function(ev){ 
                 var flag = ev.detail.flag;
@@ -46,6 +38,9 @@
             });
         },
         enterScene: function(scene) {
+            if (typeof scene === 'string') {
+                scene = this.querySelector('[name=' + scene + ']');
+            }
             if (this.scene) {
                 this.scene.leave();
             }

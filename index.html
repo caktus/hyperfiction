@@ -18,11 +18,11 @@
         to {opacity: 1.0;}
     }
 
-    .hf-reveal {
+    .reveal {
         opacity: 0.0;
     }
 
-    .active .hf-reveal {
+    .active .reveal {
         animation: reveal 3s forwards;
         -webkit-animation: reveal 3s forwards;
     }
@@ -32,23 +32,23 @@
     <hf-game gameTitle="A White Room" tagline="A test game for HyperFiction">
 
     <hf-scene name=white-room class=active>
-        You are standing in a white room, with a <a href=#box>box</a>.
+        <p>You are standing in a white room, with a <hf-action goto=box>box</hf-action>.</p>
 
         <hf-condition hasnot=item-shadow>
             The walls seem completely smooth, without any windows or doors of any sort.
         </hf-condition>
 
         <hf-condition has=item-shadow>
-            There is <a href=#hole>a small hole</a>, shaped like your shadow, in one of the white walls.
+            There is <hf-action goto=hole>a small hole</hf-action>, shaped like your shadow, in one of the white walls.
         </hf-condition>
     </hf-scene>
 
     <hf-scene name=box title="Looking into the box">
-    You've opened the box, and a light <a href=#glows>glows</a> from <a href=#within-the-box>within it</a>.
+        You've opened the box, and a light <hf-action flag=look-glowing-light keep=true>glows</hf-action> from <hf-action goto=within-the-box>within it</hf-action>.
 
-        <hf-scene name=glows>
+        <hf-condition has=look-glowing-light class=reveal>
             The light seems to be wiggling.
-        </hf-scene>
+        </hf-condition>
     </hf-scene>
 
     <hf-scene name=within-the-box>
@@ -60,19 +60,19 @@
 
         <hf-action flag=item-shadow>Take it?</hf-action>
 
-        <hf-condition has=item-shadow>
+        <hf-condition has=item-shadow class=reveal>
             You reach through the light, and you didn't know something could be so hot and still feel so... warm.
             <p>
             You take the thing wrapped in a shadow.</p>
             <p>
-            Back to the <a href=#white-room>room</a>?</p>
+            Back to the <hf-action goto=white-room>room</hf-action>?</p>
         </hf-condition>
     </hf-scene>
 
 
     <hf-scene name=hole>
         <p>The shape slides into the hole, and the shadow spreads across the walls...</p>
-        <p class=hf-reveal> You are now standing in darkness.</p>
+        <p class=reveal> You are now standing in darkness.</p>
     </hf-scene>
 
     </hf-game>

@@ -4,9 +4,10 @@
         @host {
             :scope {
                 display: none;
+                margin-top: 1em;
             }
             :scope.condition-met {
-                display: block;
+                display: inherit;
             }
         }
         </style>
@@ -31,7 +32,7 @@
                 }
             },
             checkFlag: function(flag) {
-                console.log('c', flag, this.has, this.hasnot);
+                console.log(this, this.has, this.hasnot, flag);
                 if (this.has && this.has === flag) {
                     this.addClass('condition-met');
                 } else if (!this.has) {
